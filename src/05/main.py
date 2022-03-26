@@ -91,13 +91,16 @@ class Playground:
         if(event.key == 'escape'):
             self.set_exit()
         if(event.key == ' '):
-            print("do planning...")
+            print("---------------------------------\ndo planning...")
+            print("obstacles : ",self.planning_obs)
+            print("plan start : ",self.planning_start)
+            print("plan target : ",self.planning_target)
             if self.planning_target is not None and self.planner is not None:
                 ##### TODO
                 px,py = planner.planning(self.planning_obs[:,0],self.planning_obs[:,1],self.planning_start[0],self.planning_start[1],self.planning_target[0],self.planning_target[1],-10,-10,10,10)
 
                 self.planning_path = np.vstack([px,py]).T
-                print("pathLength : ",self.planning_path.shape[0])
+                print("plan path : ",self.planning_path)
             else:
                 print("planner or target is None,please check again.")
 
