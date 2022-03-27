@@ -64,8 +64,8 @@ class Playground:
         for obs in self.planning_obs:
             self.ax.add_artist(plt.Circle((obs[0],obs[1]), self.planning_obs_radius,fill=False))
 
-        self.ax.set_xlim(-10, 10)
-        self.ax.set_ylim(-10, 10)
+        self.ax.set_xlim(self.planning_minx, self.planning_maxx)
+        self.ax.set_ylim(self.planning_miny, self.planning_maxy)
 
         plt.pause(self.dt)
 
