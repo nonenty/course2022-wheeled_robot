@@ -31,6 +31,11 @@ class Playground:
 
         ############################################
 
+        self.planning_minx = -10
+        self.planning_miny = -10
+        self.planning_maxx =  10
+        self.planning_maxy =  10
+
         self.planning_obs = np.empty(shape=(0,2))
         self.planning_obs_radius = 1.5
         self.planning_path = np.empty(shape=(0,2))
@@ -97,7 +102,7 @@ class Playground:
             print("plan target : ",self.planning_target)
             if self.planning_target is not None and self.planner is not None:
                 ##### TODO
-                px,py = planner.planning(self.planning_obs[:,0],self.planning_obs[:,1],self.planning_start[0],self.planning_start[1],self.planning_target[0],self.planning_target[1],-10,-10,10,10)
+                px,py = planner.planning(self.planning_obs[:,0],self.planning_obs[:,1],self.planning_start[0],self.planning_start[1],self.planning_target[0],self.planning_target[1],self.planning_minx,self.planning_miny,self.planning_maxx,self.planning_maxy)
 
                 self.planning_path = np.vstack([px,py]).T
                 print("plan path : ",self.planning_path)
