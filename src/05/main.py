@@ -11,13 +11,6 @@ plt.rcParams["figure.figsize"] = [8.0,8.0]
 plt.rcParams["figure.autolayout"] = True
 plt.rcParams['keymap.save'].remove('s')
 
-def transformation_matrix(x, y, theta):
-    return np.array([
-        [np.cos(theta), -np.sin(theta), x],
-        [np.sin(theta), np.cos(theta), y],
-        [0, 0, 1]
-    ])
-
 class Playground:
     def __init__(self,planner=None):
         self.dt = 0.2
