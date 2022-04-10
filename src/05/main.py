@@ -11,13 +11,6 @@ plt.rcParams["figure.figsize"] = [8.0,8.0]
 plt.rcParams["figure.autolayout"] = True
 plt.rcParams['keymap.save'].remove('s')
 
-def transformation_matrix(x, y, theta):
-    return np.array([
-        [np.cos(theta), -np.sin(theta), x],
-        [np.sin(theta), np.cos(theta), y],
-        [0, 0, 1]
-    ])
-
 class Playground:
     def __init__(self,planner=None):
         self.dt = 0.2
@@ -30,6 +23,11 @@ class Playground:
         self.NEED_EXIT = False
 
         ############################################
+
+        self.planning_minx = -10
+        self.planning_miny = -10
+        self.planning_maxx =  10
+        self.planning_maxy =  10
 
         self.planning_obs = np.empty(shape=(0,2))
         self.planning_obs_radius = 1.5
@@ -66,8 +64,8 @@ class Playground:
         for obs in self.planning_obs:
             self.ax.add_artist(plt.Circle((obs[0],obs[1]), self.planning_obs_radius,fill=False))
 
-        self.ax.set_xlim(-10, 10)
-        self.ax.set_ylim(-10, 10)
+        self.ax.set_xlim(self.planning_minx, self.planning_maxx)
+        self.ax.set_ylim(self.planning_miny, self.planning_maxy)
 
         plt.pause(self.dt)
 
@@ -97,7 +95,7 @@ class Playground:
             print("plan target : ",self.planning_target)
             if self.planning_target is not None and self.planner is not None:
                 ##### TODO
-                px,py = planner.planning(self.planning_obs[:,0],self.planning_obs[:,1],self.planning_start[0],self.planning_start[1],self.planning_target[0],self.planning_target[1],-10,-10,10,10)
+                px,py = planner.planning(self.planning_obs[:,0],self.planning_obs[:,1],self.planning_start[0],self.planning_start[1],self.planning_target[0],self.planning_target[1],self.planning_minx,self.planning_miny,self.planning_maxx,self.planning_maxy)
 
                 self.planning_path = np.vstack([px,py]).T
                 print("plan path : ",self.planning_path)
